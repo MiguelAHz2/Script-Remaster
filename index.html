@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4f46e5">
+    <title>VTR - Gestor de Scripts</title>
+    <link rel="icon" type="image/png" href="./public/logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="boton" id="inicio">
+        <button class="btn" id="openModal">
+            <i class="fas fa-plus-circle"></i>
+            Generar script
+        </button>
+        <button class="btn" id="openModal1">
+            <i class="fas fa-comment-dots"></i>
+            Generar comentarios
+        </button>
+        <button class="btn" id="downloadButton">
+            <i class="fas fa-download"></i>
+            Descargar gestiones
+        </button>
+        <button class="btn" id="importarButton">
+            <i class="fas fa-file-import"></i>
+            Importar
+        </button>
+        <button class="btn" id="exportarButton">
+            <i class="fas fa-file-export"></i>
+            Exportar
+        </button>    
+        <label for="fileInput" class="btn">
+            <i class="fas fa-image"></i>
+            Cambiar fondo
+        </label>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+    </div>
+</header>
+
+<!-- Modal para generar comentarios -->
+<div class="modal1" id="textModal1">
+    <div class="modal-content1">
+        <div class="modal-header">
+            <h2><i class="fas fa-comment-dots"></i> COMENTARIOS</h2>
+            <button class="close1" id="closeModal1" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="textForm1">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="activityId1">
+                        <i class="fas fa-hashtag"></i>
+                        ID de la actividad
+                    </label>
+                    <input type="text" id="activityId1" placeholder="Ingrese ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="ticketId1">
+                        <i class="fas fa-ticket-alt"></i>
+                        Ticket Blip
+                    </label>
+                    <input type="text" id="ticketId1" placeholder="Ingrese ticket" required>
+                </div>
+                <div class="form-group">
+                    <label for="technicianName1">
+                        <i class="fas fa-user-tie"></i>
+                        Nombre del técnico
+                    </label>
+                    <input type="text" id="technicianName1" placeholder="Ingrese nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="comments1">
+                        <i class="fas fa-comment"></i>
+                        Comentarios de gestión
+                    </label>
+                    <input type="text" id="comments1" placeholder="Ingrese comentarios" required>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <label for="numbers">
+                    <i class="fas fa-phone"></i>
+                    Números de contacto
+                </label>
+                <div class="numbers-grid">
+                    <input type="text" id="number1" placeholder="Número principal" required>
+                    <input type="text" id="number2" placeholder="Número alternativo">
+                    <input type="text" id="number3" placeholder="Número adicional">
+                    <input type="text" id="number4" placeholder="Otro número">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reason">
+                        <i class="fas fa-clipboard-check"></i>
+                        Motivo de cierre
+                    </label>
+                    <select id="reason" class="custom-select">
+                        <option value="" disabled selected>Seleccione un motivo</option>
+                        <option value="Sin moradores">Sin moradores</option>
+                        <option value="Cliente reagenda">Cliente reagenda</option>
+                        <option value="Falta de dotación">Falta de dotación</option>
+                        <option value="Sin acceso a vivienda">Sin acceso a vivienda</option>
+                        <option value="Acometida fuera de norma">Acometida fuera de norma</option>
+                        <option value="Casa sin medidor - remarcador">Casa sin medidor - remarcador</option>
+                        <option value="Servicio Ok al momento de la visita">Servicio Ok al momento de la visita</option>
+                        <option value="Ductos tapados">Ductos tapados</option>
+                        <option value="Evento contingencia">Evento contingencia</option>
+                        <option value="Falla masiva">Falla masiva</option>
+                        <option value="Falta de material no seriado">Falta de material no seriado</option>
+                        <option value="Falta de material CPE">Falta de material CPE</option>
+                        <option value="No aplica atento">No aplica atento</option>
+                        <option value="Técnico soluciona / desiste">Técnico soluciona / desiste</option>
+                        <option value="Cliente desiste por otro motivo">Cliente desiste por otro motivo</option>
+                        <option value="Sin red">Sin red</option>
+                        <option value="Riesgo eléctrico">Riesgo eléctrico</option>
+                        <option value="NAP copado">NAP copado</option>
+                        <option value="Zona roja">Zona roja</option>
+                        <option value="Técnico sin estacionamiento">Técnico sin estacionamiento</option>
+                        <option value="Sin pierrack">Sin pierrack</option>
+                        <option value="Sin contacto reiterado">Sin contacto reiterado</option>
+                    </select>
+                </div>
+
+                <div class="toggle-buttons">
+                    <button type="button" id="gpsBtn" class="toggle-btn">
+                        <i class="fas fa-map-marker-alt"></i>
+                        GPS ok
+                    </button>
+                    <button type="button" id="contactBtn" class="toggle-btn">
+                        <i class="fas fa-phone-alt"></i>
+                        Con contacto
+                    </button>
+                    <button type="button" id="evidenceBtn" class="toggle-btn">
+                        <i class="fas fa-camera"></i>
+                        Sin evidencia
+                    </button>
+                    <button type="button" id="clientReagendaBtn" class="toggle-btn">
+                        <i class="fas fa-calendar-alt"></i>
+                        Cliente no reagenda
+                    </button>
+                    <button type="button" id="clientenoreconoce" class="toggle-btn">
+                        <i class="fas fa-user-check"></i>
+                        Cliente reconoce agenda
+                    </button>
+                    <button type="button" id="clientedesconoce" class="toggle-btn">
+                        <i class="fas fa-user-times"></i>
+                        Cliente no desconoce agenda
+                    </button>
+                    <button type="button" id="fusionadora" class="toggle-btn">
+                        <i class="fas fa-tools"></i>
+                        Sin fusionadora
+                    </button>
+                    <button type="button" id="squad" class="toggle-btn">
+                        <i class="fas fa-users"></i>
+                        SQUAD
+                    </button>
+                </div>
+            </div>
+            
+            <div class="result-section">
+                <div id="resultText" class="result-box">
+                    <h3><i class="fas fa-clipboard"></i> Resultado:</h3>
+                    <div class="result-content"></div>
+                </div>
+
+                <button type="button" id="copyBtn" class="btn copy-btn">
+                    <i class="fas fa-copy"></i>
+                    Copiar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal para crear scripts -->
+<div class="modal" id="cardModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-plus-circle"></i> Nuevo script</h2>
+            <button class="close" id="closeModal" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="cardForm">
+            <div class="form-group">
+                <label for="cardTitle">
+                    <i class="fas fa-heading"></i>
+                    Título
+                </label>
+                <input type="text" id="cardTitle" required placeholder="Ingrese el título">
+            </div>
+            
+            <div class="form-group">
+                <label for="cardContent">
+                    <i class="fas fa-align-left"></i>
+                    Contenido
+                </label>
+                <textarea id="cardContent" rows="3" required placeholder="Ingrese el contenido del script"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="cardColor">
+                    <i class="fas fa-palette"></i>
+                    Color
+                </label>
+                <input type="color" id="cardColor" value="#ffffff">
+            </div>
+            
+            <button type="submit" class="btn create-btn">
+                <i class="fas fa-plus"></i>
+                Crear script
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Contenedor de tarjetas -->
+<div class="card-container" id="cardContainer">
+    <!-- Las tarjetas se agregarán aquí dinámicamente -->
+</div>
+
+<button id="scroll-up-btn" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</body>
+</html>
+
